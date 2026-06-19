@@ -14,3 +14,27 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# PV TP Integrador Grupo 10
+
+## Descripción
+
+Aplicación web desarrollada con React y Vite que implementa Context API,
+React Router, LocalStorage y consumo de la FakeStoreAPI para gestionar clientes.
+
+## Integrantes
+
+- CLAUDIO EMANUEL AGUIRRE GOMEZ Username github: clauguirre-afk 
+- FLORENCIA MARIA LUJAN CORDOBA Username github: cordobaflorencia
+- FLORES APARICIO DANIEL JESUS: dani26-byte
+- RUIZ ALBARO SAMUEL: samuelxd14
+- ARGOTA MARTIN RAMON: martin-argota-2026
+
+## Tecnologías
+
+- React
+- Vite
+- React Router DOM
+- Material UI (o React Bootstrap)
+- Context API
+- LocalStorage
+- Fetch API
