@@ -25,9 +25,9 @@ React Router, LocalStorage y consumo de la FakeStoreAPI para gestionar clientes.
 
 - CLAUDIO EMANUEL AGUIRRE GOMEZ Username github: clauguirre-afk 
 - FLORENCIA MARIA LUJAN CORDOBA Username github: cordobaflorencia
-- FLORES APARICIO DANIEL JESUS: dani26-byte
-- RUIZ ALBARO SAMUEL: samuelxd14
-- ARGOTA MARTIN RAMON: martin-argota-2026
+- FLORES APARICIO DANIEL JESUS Username github: dani26-byte
+- RUIZ ALBARO SAMUEL Username github: samuelxd14
+- ARGOTA MARTIN RAMON Username github: martin-argota-2026
 
 ## Tecnologías
 
