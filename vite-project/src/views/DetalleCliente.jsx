@@ -7,7 +7,7 @@ function DetalleCliente() {
   return (
     <div>
       <h1>Detalle Cliente</h1>;
-      <p>ID del Cliente</p>
+      <p>Cliente seleccionado: {id}</p>
 
     </div>
   )
