@@ -4,6 +4,9 @@ import Login from "./views/Login";
 import Dashboard from "./views/Dashboard";
 import ListaClientes from "./views/ListaClientes";
 import DetalleCliente from "./views/DetalleCliente";
+import { Header } from "./components/layout/Header";
+import { Nav } from "./components/layout/Nav";
+import { Footer } from "./components/layout/Footer";
 
 function App() {
   return (
@@ -18,7 +21,10 @@ function App() {
         path="/"
         element={
           <ProtectedRoute>
+            <Header />
+            <Nav />
             <Dashboard />
+            <Footer />
           </ProtectedRoute>
         }
       />
@@ -27,6 +33,7 @@ function App() {
         path="/clientes"
         element={
           <ProtectedRoute>
+            <Header />
             <ListaClientes />
           </ProtectedRoute>
         }
@@ -36,6 +43,7 @@ function App() {
         path="/clientes/:id"
         element={
           <ProtectedRoute>
+            <Header />
             <DetalleCliente />
           </ProtectedRoute>
         }
