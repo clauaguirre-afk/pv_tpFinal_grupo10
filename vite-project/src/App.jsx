@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import Login from "./views/Login";
 import Dashboard from "./views/Dashboard";
-import ListaClientes from "./views/ListaClientes";
+import { ListaClientes } from "./views/ListaClientes";
 import DetalleCliente from "./views/DetalleCliente";
 import { Header } from "./components/layout/Header";
 import { Nav } from "./components/layout/Nav";
@@ -34,6 +34,7 @@ function App() {
         element={
           <ProtectedRoute>
             <Header />
+            <Nav />
             <ListaClientes />
           </ProtectedRoute>
         }
