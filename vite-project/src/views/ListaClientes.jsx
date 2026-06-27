@@ -1,32 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Button } from "@mui/material";
+import { useClientes } from "../services/ClientesService";
+import { Box, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Button, Alert } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { Loader } from "../components/common/Loader";
 
 export const ListaClientes = () => {
-  const [clientes, setClientes] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
+
+  const { clientes, cargando, error } = useClientes();
 
   const [busqueda, setBusqueda] = useState('');
-
-  useEffect(() => {
-    const obtenerClientes = async () => {
-      try {
-        const respuesta = await fetch('https://fakestoreapi.com/users');
-        if (!respuesta.ok) throw new Error('Error al conectar con la base de datos');
-
-        const datos = await respuesta.json();
-        setClientes(datos);
-        setCargando(false);
-      } catch(err) {
-        setError(err.message);
-        setCargando(false);
-      }
-    };
-
-    obtenerClientes();
-  }, []);
 
   const clientesFiltrados = clientes.filter((cliente) => {
     const nombreCompleto = `${cliente.name.firstname} ${cliente.name.lastname}`.toLowerCase();
@@ -35,8 +18,21 @@ export const ListaClientes = () => {
     return nombreCompleto.includes(textoBusqueda);
   });
 
-  if (cargando) return <h3>Cargando lista de clientes, por favor espere...</h3>;
-  if (error) return <h3>Ocurrió un problema: {error}</h3>;
+  if (cargando) {
+    return <Loader mensaje="Cargando lista de clientes, por favor espere..."/>;
+  }
+  if (error) {
+    return (
+      <Box sx={{ mt: 3 }}>
+        <Alert severity="error" variant="filled" sx={{ borderRadius: 3 }}>
+          <Typography variant="subtitle1" fontWeight="bold">
+            Ocurrió un problema de conexión
+          </Typography>
+          {error}
+        </Alert>
+      </Box>
+    );
+  }
 
   return (
     <Paper elevation={2} sx={{ p:3, borderRadius: 3, mt: 3 }}>
