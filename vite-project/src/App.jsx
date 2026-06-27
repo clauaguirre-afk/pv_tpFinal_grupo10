@@ -7,6 +7,7 @@ import DetalleCliente from "./views/DetalleCliente";
 import { Header } from "./components/layout/Header";
 import { Nav } from "./components/layout/Nav";
 import { Footer } from "./components/layout/Footer";
+import { Container } from "@mui/material";
 
 function App() {
   return (
@@ -21,10 +22,12 @@ function App() {
         path="/"
         element={
           <ProtectedRoute>
-            <Header />
-            <Nav />
-            <Dashboard />
-            <Footer />
+            <Container maxWidth="lg" sx={{ py: 4 }}>
+              <Header />
+              <Nav />
+              <Dashboard />
+              <Footer />
+            </Container>
           </ProtectedRoute>
         }
       />
@@ -33,9 +36,12 @@ function App() {
         path="/clientes"
         element={
           <ProtectedRoute>
-            <Header />
-            <Nav />
-            <ListaClientes />
+            <Container maxWidth="lg" sx={{ py: 4 }}>           
+              <Header />
+              <Nav />
+              <ListaClientes />
+              <Footer />
+            </Container>
           </ProtectedRoute>
         }
       />
@@ -44,8 +50,12 @@ function App() {
         path="/clientes/:id"
         element={
           <ProtectedRoute>
-            <Header />
-            <DetalleCliente />
+            <Container maxWidth="lg" sx={{ py: 4 }}>           
+              <Header />
+              <Nav />
+              <DetalleCliente />
+              <Footer />
+            </Container>
           </ProtectedRoute>
         }
       />
