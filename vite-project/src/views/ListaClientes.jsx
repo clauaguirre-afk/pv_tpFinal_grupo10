@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Box, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Button } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 export const ListaClientes = () => {
   const [clientes, setClientes] = useState([]);
@@ -37,49 +39,62 @@ export const ListaClientes = () => {
   if (error) return <h3>Ocurrió un problema: {error}</h3>;
 
   return (
-    <div>
-      <h2>Listado de Clientes Activos</h2>
-      <div>
-        <input
-          type="text"
+    <Paper elevation={2} sx={{ p:3, borderRadius: 3, mt: 3 }}>
+      <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: 'primary.main'}}>
+        Listado de Clientes Activos
+      </Typography>
+      <Box sx={{ mb: 3 }}>
+        <TextField
+          fullWidth
+          variant="outlined"
           placeholder="Buscar por nombre o apellido..."
           value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}>  
-        </input>
-      </div>
-      {/* Tabla de Clientes*/}
-      <table border="1">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {clientesFiltrados.length > 0 ? (
-            clientesFiltrados.map((cliente) => (
-              <tr key={cliente.id}>
-                <td>{cliente.id}</td>
-                <td>{cliente.name.firstname}</td>
-                <td>{cliente.name.lastname}</td>
-                <td>{cliente.email}</td>
-                <td>
-                  <Link to={`/clientes/${cliente.id}`}>
-                    Ver Ficha Completa
-                  </Link>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td>No se encontraron clientes con ese nombre</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+          onChange={(e) => setBusqueda(e.target.value)}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon color="action" />
+                </InputAdornment>
+              ),
+              sx: { borderRadius: 3 }
+            }       
+          }}      
+        />
+      </Box>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Nombre</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Apellido</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Email</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Acciones</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {clientesFiltrados.map((cliente) => (
+              <TableRow key={cliente.id} hover>
+                <TableCell>{cliente.id}</TableCell>
+                <TableCell>{cliente.name.firstname}</TableCell>
+                <TableCell>{cliente.name.lastname}</TableCell>
+                <TableCell>{cliente.email}</TableCell>
+                <TableCell>
+                  <Button
+                    component={Link}
+                    to={`/clientes/${cliente.id}`}
+                    variant="contained"
+                    size="small"
+                  >            
+                    Ver ficha completa
+                  </Button> 
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 };
