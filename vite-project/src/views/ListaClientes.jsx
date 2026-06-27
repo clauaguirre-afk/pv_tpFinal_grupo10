@@ -6,21 +6,21 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Loader } from "../components/common/Loader";
 
 export const ListaClientes = () => {
-
   const { clientes, cargando, error } = useClientes();
-
   const [busqueda, setBusqueda] = useState('');
 
   const clientesFiltrados = clientes.filter((cliente) => {
-    const nombreCompleto = `${cliente.name.firstname} ${cliente.name.lastname}`.toLowerCase();
-    const textoBusqueda = busqueda.toLowerCase();
+    const termino = busqueda.toLowerCase();
+    const apellido = cliente.name?.lastname?.toLowerCase() || '';
+    const city = cliente.address?.city?.toLowerCase() || '';
 
-    return nombreCompleto.includes(textoBusqueda);
+    return apellido.includes(termino) || city.includes(termino);
   });
 
   if (cargando) {
     return <Loader mensaje="Cargando lista de clientes, por favor espere..."/>;
   }
+
   if (error) {
     return (
       <Box sx={{ mt: 3 }}>
@@ -35,15 +35,16 @@ export const ListaClientes = () => {
   }
 
   return (
-    <Paper elevation={2} sx={{ p:3, borderRadius: 3, mt: 3 }}>
+    <Paper elevation={2} sx={{ p: 3, borderRadius: 3, mt: 3 }}>
       <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: 'primary.main'}}>
         Listado de Clientes Activos
       </Typography>
+      
       <Box sx={{ mb: 3 }}>
         <TextField
           fullWidth
           variant="outlined"
-          placeholder="Buscar por nombre o apellido..."
+          placeholder="Buscar por apellido o ciudad..."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           slotProps={{
@@ -58,36 +59,49 @@ export const ListaClientes = () => {
           }}      
         />
       </Box>
+
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Nombre</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Apellido</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Nombre Completo</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Email</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Acciones</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Teléfono</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Ciudad</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }} align="center">Acciones</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {clientesFiltrados.map((cliente) => (
-              <TableRow key={cliente.id} hover>
-                <TableCell>{cliente.id}</TableCell>
-                <TableCell>{cliente.name.firstname}</TableCell>
-                <TableCell>{cliente.name.lastname}</TableCell>
-                <TableCell>{cliente.email}</TableCell>
-                <TableCell>
-                  <Button
-                    component={Link}
-                    to={`/clientes/${cliente.id}`}
-                    variant="contained"
-                    size="small"
-                  >            
-                    Ver ficha completa
-                  </Button> 
+            {clientesFiltrados.length > 0 ? (
+              clientesFiltrados.map((cliente) => (
+                <TableRow key={cliente.id} hover>
+                  <TableCell>{cliente.id}</TableCell>
+                  <TableCell>{`${cliente.name?.firstname} ${cliente.name?.lastname}`}</TableCell>
+                  <TableCell>{cliente.email}</TableCell>
+                  <TableCell>{cliente.phone || 'N/D'}</TableCell>
+                  <TableCell>{cliente.address?.city || 'N/D'}</TableCell>
+                  <TableCell align="center">
+                    <Button
+                      component={Link}
+                      to={`/clientes/${cliente.id}`}
+                      variant="contained"
+                      size="small"
+                    >            
+                      Ver ficha completa
+                    </Button> 
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={6} align="center">
+                  <Typography color="text.secondary" sx={{ py: 2 }}>
+                    No se encontraron clientes que coincidan con la búsqueda.
+                  </Typography>
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>

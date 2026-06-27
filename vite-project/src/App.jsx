@@ -8,6 +8,7 @@ import { Header } from "./components/layout/Header";
 import { Nav } from "./components/layout/Nav";
 import { Footer } from "./components/layout/Footer";
 import { Container } from "@mui/material";
+import FormularioAlta from "./components/common/FormularioAlta";
 
 function App() {
   return (
@@ -45,6 +46,15 @@ function App() {
           </ProtectedRoute>
         }
       />
+      
+      <Route
+          path="/nuevo-cliente"
+          element={
+            <ProtectedRoute>
+              <FormularioAlta />
+            </ProtectedRoute>
+          }
+        />
 
       <Route
         path="/clientes/:id"
