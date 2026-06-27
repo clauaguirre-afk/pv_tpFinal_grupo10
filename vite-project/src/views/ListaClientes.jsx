@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useClientes } from "../services/ClientesService";
-import { Box, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Button, CircularProgress, Alert } from "@mui/material";
+import { Box, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Button, Alert } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { Loader } from "../components/common/Loader";
 
 export const ListaClientes = () => {
 
@@ -18,14 +19,7 @@ export const ListaClientes = () => {
   });
 
   if (cargando) {
-    return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mt: 8 }}>
-        <CircularProgress size={50} />
-        <Typography variant="h6" sx={{ mt: 2, color: 'text.secondary' }}>
-          Cargando lista de clientes, por favor espere...
-        </Typography>
-      </Box>
-    );
+    return <Loader mensaje="Cargando lista de clientes, por favor espere..."/>;
   }
   if (error) {
     return (
