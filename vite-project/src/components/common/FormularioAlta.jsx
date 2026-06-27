@@ -26,7 +26,7 @@ const FormularioAlta = () => {
     });
   };
 
-  // Envío Asincrónico Interceptado (Petición POST)
+  // Envío Asincrónico Interceptado "Petición POST"
   const handleSubmit = async (e) => {
     e.preventDefault(); // Detiene la recarga del navegador
     setCargando(true);
