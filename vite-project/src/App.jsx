@@ -2,8 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import Login from "./views/Login";
 import Dashboard from "./views/Dashboard";
-import ListaClientes from "./views/ListaClientes";
+import { ListaClientes } from "./views/ListaClientes";
 import DetalleCliente from "./views/DetalleCliente";
+import { Header } from "./components/layout/Header";
+import { Nav } from "./components/layout/Nav";
+import { Footer } from "./components/layout/Footer";
+import { Container } from "@mui/material";
+import FormularioAlta from "./components/common/FormularioAlta";
 
 function App() {
   return (
@@ -18,7 +23,12 @@ function App() {
         path="/"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <Container maxWidth="lg" sx={{ py: 4 }}>
+              <Header />
+              <Nav />
+              <Dashboard />
+              <Footer />
+            </Container>
           </ProtectedRoute>
         }
       />
@@ -27,16 +37,35 @@ function App() {
         path="/clientes"
         element={
           <ProtectedRoute>
-            <ListaClientes />
+            <Container maxWidth="lg" sx={{ py: 4 }}>           
+              <Header />
+              <Nav />
+              <ListaClientes />
+              <Footer />
+            </Container>
           </ProtectedRoute>
         }
       />
+      
+      <Route
+          path="/nuevo-cliente"
+          element={
+            <ProtectedRoute>
+              <FormularioAlta />
+            </ProtectedRoute>
+          }
+        />
 
       <Route
         path="/clientes/:id"
         element={
           <ProtectedRoute>
-            <DetalleCliente />
+            <Container maxWidth="lg" sx={{ py: 4 }}>           
+              <Header />
+              <Nav />
+              <DetalleCliente />
+              <Footer />
+            </Container>
           </ProtectedRoute>
         }
       />
