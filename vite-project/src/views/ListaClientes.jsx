@@ -1,4 +1,25 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import useClientes from "../hooks/useClientes";
+import Loader from "../components/common/Loader";
 
+import {
+  Paper,
+  Typography,
+  Box,
+  TextField,
+  InputAdornment,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Alert,
+} from "@mui/material";
+
+import SearchIcon from "@mui/icons-material/Search";
 export const ListaClientes = () => {
   const { clientes, cargando, error } = useClientes();
   const [busqueda, setBusqueda] = useState('');
