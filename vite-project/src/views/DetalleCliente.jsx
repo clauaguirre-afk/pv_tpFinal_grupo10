@@ -31,6 +31,7 @@ function DetalleCliente() {
     });
   };
 
+  //Para evitar errores, mientra los datos no llegan
   if(!cliente){
     return <h2>Cargando...</h2>
   }
@@ -38,14 +39,17 @@ function DetalleCliente() {
   return (
     <div>
       <h1>Detalle Cliente</h1>
-
+      
+      {/*Renderizo los datos del cliente */}
       <p>Nombre: {cliente.name.firstname} {cliente.name.lastname}</p>
       <p>Email: {cliente.email}</p>
       <p>Telefono: {cliente.phone}</p>
 
+      {/*Muestro credenciales del cliente */}
       <p>Usuario: {cliente.username}</p>
       <p>Contraseña: {cliente.password}</p>
 
+      {/*Muestro los datos anidados de direccion */}
       <h3>Dirección</h3>
 
       <p>Calle: {cliente.address.street}</p>
