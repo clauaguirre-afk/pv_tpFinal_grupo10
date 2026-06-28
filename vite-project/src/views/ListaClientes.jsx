@@ -1,6 +1,12 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Box, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, Button, Alert } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { Loader } from "../components/common/Loader";
+import { useClientesGlobal } from "../context/ClientesContext";
 
 export const ListaClientes = () => {
-  const { clientes, cargando, error } = useClientes();
+  const { clientes = [], cargando, error } = useClientesGlobal();
   const [busqueda, setBusqueda] = useState('');
 
   const clientesFiltrados = clientes.filter((cliente) => {

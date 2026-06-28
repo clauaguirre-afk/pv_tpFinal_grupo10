@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { TextField, Button, Box, Typography, Snackbar, Alert, Paper, Grid } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useClientesGlobal } from '../../context/ClientesContext';
 
 const FormularioAlta = () => {
   const navigate = useNavigate(); 
+  const { agregarClienteManual, clientes } = useClientesGlobal();
   
   const [formData, setFormData] = useState({
     email: '',
@@ -56,9 +58,24 @@ const FormularioAlta = () => {
       }
 
       const data = await response.json();
+
+      const nuevoClienteDatos = {
+        email: formData.email,
+        username: formData.username,
+        name: {
+          firstname: formData.firstname,
+          lastname: formData.lastname
+        },
+        phone: 'N/D',
+        address: {
+          city: 'N/D'
+        }
+      };
+
+      const idReal = agregarClienteManual(nuevoClienteDatos);
       
       // Captura del ID y disparo del Feedback Visual temporal
-      setNuevoId(data.id);
+      setNuevoId(idReal);
       setOpenSnackbar(true);
       
       // Reseteo inmediato de campos tras la confirmación de éxito
@@ -71,7 +88,7 @@ const FormularioAlta = () => {
     }
   };
 
-   return (
+  return (
     <Paper elevation={2} sx={{ maxWidth: 500, mx: 'auto', mt: 4, p: 4, borderRadius: 3 }}>
       <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3, color: 'primary.main' }}>
         Dar de Alta Nuevo Cliente
