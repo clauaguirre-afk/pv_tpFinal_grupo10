@@ -5,6 +5,23 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Loader } from "../components/common/Loader";
 import { useClientesGlobal } from "../context/ClientesContext";
 
+import {
+  Paper,
+  Typography,
+  Box,
+  TextField,
+  InputAdornment,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Alert,
+} from "@mui/material";
+
+import SearchIcon from "@mui/icons-material/Search";
 export const ListaClientes = () => {
   const { clientes = [], cargando, error } = useClientesGlobal();
   const [busqueda, setBusqueda] = useState('');
