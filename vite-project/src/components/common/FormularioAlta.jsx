@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import { TextField, Button, Box, Typography, Snackbar, Alert, Paper, Grid } from '@mui/material';
+import { TextField, Button, Box, Typography, Snackbar, Alert, Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useClientesGlobal } from '../../context/ClientesContext';
 
 const FormularioAlta = () => {
   const navigate = useNavigate(); 
-  const { agregarClienteManual, clientes } = useClientesGlobal();
+  const { agregarClienteManual } = useClientesGlobal();
   
   const [formData, setFormData] = useState({
     email: '',
@@ -72,10 +72,10 @@ const FormularioAlta = () => {
         }
       };
 
-      const idReal = agregarClienteManual(nuevoClienteDatos);
+      agregarClienteManual({...nuevoClienteDatos,id:data.id});
       
       // Captura del ID y disparo del Feedback Visual temporal
-      setNuevoId(idReal);
+      setNuevoId(data.id);
       setOpenSnackbar(true);
       
       // Reseteo inmediato de campos tras la confirmación de éxito

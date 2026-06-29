@@ -20,9 +20,12 @@ export const AdminProvider = ({ children }) => {
     setAdmin(null);
     localStorage.removeItem("admin");
   };
+  //Hace que quede totalmente sincronizado.
   useEffect(() => {
     if (admin) {
       localStorage.setItem( "admin", JSON.stringify(admin));
+    } else {
+      localStorage.removeItem("admin");
     }
   }, [admin]);
   return (
