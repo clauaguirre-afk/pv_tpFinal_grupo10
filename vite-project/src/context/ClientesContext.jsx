@@ -2,7 +2,6 @@ import { createContext, useEffect, useState, useContext } from "react";
 import { ClientesService} from "../services/ClientesService";
 
 export const ClientesContext = createContext();
-
 export const ClientesProvider = ({ children }) => {
     const [clientes, setClientes] = useState([]);
     const [cargando, setCargando] = useState(true);
@@ -24,20 +23,15 @@ export const ClientesProvider = ({ children }) => {
     }, []);
 
     const agregarClienteManual = (nuevoCliente) => {
-        const idMax = clientes.length > 0
-            ? Math.max(...clientes.map(c => Number(c.id) || 0))
-            : 0;
-
-        const idGenerado = idMax + 1;
-
-        const clienteCompleto = { ...nuevoCliente, id: idGenerado };
-        setClientes((clientesActuales) => [...clientesActuales, clienteCompleto]);
-
-        return idGenerado;
+        setClientes(clientesActuales => [...clientesActuales, nuevoCliente]);
+    };
+    
+    const eliminarCliente = (id) => {
+        setClientes(clientesActuales => clientesActuales.filter(cliente => cliente.id !== Number(id)));
     };
 
     return (
-        <ClientesContext.Provider value={{ clientes, cargando, error, agregarClienteManual }}>
+        <ClientesContext.Provider value={{ clientes, cargando, error, agregarClienteManual, eliminarCliente}}>
             {children}
         </ClientesContext.Provider>
     );

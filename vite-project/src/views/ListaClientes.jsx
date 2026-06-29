@@ -40,13 +40,7 @@ export const ListaClientes = () => {
       </Typography>
       
       <Box sx={{ mb: 3 }}>
-        <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="Buscar por apellido o ciudad..."
-          value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
-          slotProps={{
+        <TextField fullWidth variant="outlined" placeholder="Buscar por  apellido o ciudad..." value={busqueda} onChange={(e) => setBusqueda(e.target.value)} slotProps={{
             input: {
               startAdornment: (
                 <InputAdornment position="start">
